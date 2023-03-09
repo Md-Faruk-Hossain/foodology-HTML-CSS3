@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>food Item</title>
+    <style type="text/css">
+        body {
+            font-family: "Century Gothic";
+            font-size: .9em;
+        }
+
+        #container {
+            width: 980px;
+            margin: 20px auto;
+        }
+
+            #container .pd {
+                background-color: black;
+                color: white;
+            }
+
+        #right {
+            width: 680px;
+            float: right;
+            padding: 5px 10px 5px 0;
+        }
+
+            #right h2 a {
+                float: inherit;
+            }
+
+        #left {
+            width: 280px;
+            float: left;
+            padding-left: 10px;
+        }
+
+        .label {
+            display: block;
+            font-weight: 700;
+        }
+
+        input[type=text] {
+            border: 1px solid #ccc;
+        }
+
+        #tbl {
+            width: 100%;
+            border: 1px solid black;
+        }
+
+            #tbl th {
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+            }
+
+            #tbl td {
+                border-right: 1px solid black;
+                border-bottom: 1px solid black;
+                background-color: aqua;
+            }
+
+        .edit {
+            background-color: blue;
+            color: white;
+        }
+
+        .delete {
+            background-color: gray;
+            color: white;
+        }
+    </style>
+    <script src="Scripts/jquery.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="right">
+            <h2>Product Details</h2>
+            <h2><a href="home.html">Home</a></h2>
+            <table id="tbl" cellpadding="3" cellspacing="0">
+                <thead class="pd">
+                    <tr>
+
+                        <th>Imagepath</th>
+                        <th>FoodName</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Edit | Delete</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="left">
+            <h2>Product Create</h2>           
+
+            <div>
+                <label class="label">Imagepath</label>
+                <input type="text" id="path" />
+            </div>
+            <div>
+                <label class="label">FoodName</label>
+                <input type="text" id="name" />
+            </div>
+            <div>
+                <label class="label">Description</label>
+                <input type="text" id="descrip" />
+            </div>
+            <div>
+                <label class="label">Price</label>
+                <input type="text" id="price" />
+            </div>
+            <div>
+                <input type="button" id="save" value="save" />
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+        window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+        window.IDBCursor = window.IDBCursor || window.webkitIDBCursor;
+        window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+
+        var db;
+        var currentEdit = null;
+
+        $(document).ready(function () {
+            var openReq = indexedDB.open("PetDB", 1);
+            openReq.onupgradeneeded = function (e) {
+                db = e.target.result;
+
+                var store = db.createObjectStore("petTbl", { keyPath: "id", autoIncrement: true });
+                console.log(store);
+            }
+
+            openReq.onsuccess = function (e) {
+                db = e.target.result;
+                console.log(db);
+                readAll();
+
+                //save Data
+                $("#save").click(function () {
+                    if ($("#path").val() != "" && $("#name").val() != "" && $("#descrip").val() != "" && $("#price").val() != "") {
+                        var tx = db.transaction(["petTbl"], "readwrite");
+                        if (currentEdit == null) {
+                            var store = tx.objectStore("petTbl");
+                            var req = store.add({
+                               Path: $("#path").val(),
+                                Name: $("#name").val(),
+                                Descrip: $("#descrip").val(),
+                                Price: $("#price").val()
+                            });
+                            req.onsuccess = function (e) {
+                                console.log("save data...");
+                                readAll();
+                            }
+                        }
+                        else {
+                            var store = tx.objectStore("petTbl");
+                            var req = store.put({
+                                Path: $("#path").val(),
+                                Name: $("#name").val(),
+                                Descrip: $("#descrip").val(),
+                                Price: $("#price").val(),
+                                id: currentEdit.id
+                            });
+                            req.onsuccess = function (e) {
+                                console.log("Updated data...");
+                                readAll();
+                            }
+                        }
+                        $("#add").val("save");
+                        currentEdit = null;
+                    }
+                    else {
+                        alert("Please fill up the all fields!!!");
+                    }
+                });
+            }
+        });
+
+        function readAll() {
+            $("#tbl tbody").empty();
+            var tx = db.transaction(["petTbl"], "readonly");
+            var req = tx.objectStore("petTbl").openCursor();
+            req.onsuccess = function (e) {
+                var cursor = e.target.result;
+                if (!cursor) return;
+                $("#tbl tbody").append(
+                    "<tr>" +
+                    "<td>" + cursor.value.Path + "</td>" +
+                    "<td>" + cursor.value.Name + "</td>" +
+                    "<td>" + cursor.value.Descrip + "</td>" +
+                    "<td>" + cursor.value.Price + "</td>" +
+                    "<td>" + "<button type='button' class='edit' data-key='" + cursor.key + "'>Edit</button>|<button type = 'button' class='delete' data-key='" + cursor.key + "'>Delete</button>" + "</td>" +
+                    "</tr>"
+                )
+                cursor.continue();
+            }
+            req.onerror = function (err) {
+                console.log(err);
+            }
+            //for delete
+            tx.oncomplete = function () {
+                $(".delete").click(function () {
+                    var id = $(this).attr('data-key');
+                    var row = $(this).parent().parent();
+                    var tx = db.transaction(["petTbl"], "readwrite");
+                    var store = tx.objectStore("petTbl");
+                    var req = store.delete(parseInt(id));
+                    req.onsuccess = function (e) {
+                        console.log("Data deleted successfullly!!!!");
+                        row.remove();
+                    }
+                })
+
+                //For edit
+                $(".edit").click(function (evt) {
+                    evt.preventDefault();
+                    fillForm($(this).attr('data-key'));
+                })
+            }
+        }
+
+        function fillForm(id) {
+            var t = db.transaction(["petTbl"], "readwrite");
+            var objStore = t.objectStore("petTbl");
+            var request = objStore.get(parseInt(id));
+            request.onsuccess = function (evt) {
+                currentEdit = request.result;
+                console.log(currentEdit);
+                $("#path").val(currentEdit.Path);
+                $("#name").val(currentEdit.Name);
+                $("#descript").val(currentEdit.Descrip);
+                $("#price").val(currentEdit.Price);
+                $("#add").val("Update");
+            }
+        }
+    </script>
+</body>
+</html>

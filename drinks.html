@@ -1,0 +1,472 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        body {
+            background-color: white;
+        }
+
+        .main {
+            width: 100%;
+            height: auto;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .left {
+            height: auto;
+            margin: 0;
+            padding: 0;
+            width: 360px;
+            background-color: darkgrey;
+        }
+
+        .right {
+            height: auto;
+            margin: 0;
+            padding: 0;
+            width: 360px;
+            background-color: darkgrey;
+        }
+
+        .container {
+            width: 960px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .head {
+            width: 100%;
+            height: 50px;
+            background-color: black;
+        }
+	
+      		  .head .header-nav {
+                width: 110%;
+                height: 70px;
+                display: flex;
+                background-color: black;
+            }
+
+                .head .header-nav ul li {
+                    float: left;
+                    padding-right: 60px;
+                    list-style: none;
+                    align-items: center;
+                    height: 25px;
+                    margin: 5px;
+                    background-color: azure;
+                }
+
+                    .head .header-nav ul li a {
+                        text-decoration: none;
+                        color: black;
+                        font-weight: 400;
+                        font-size: 1.25em;
+                    }
+
+
+
+            .head .header-btn {
+                width: 10%;
+                height: 10px;
+                text-align: right;
+                padding-right: 100px;
+            }
+
+                .head .header-btn button {
+                    margin-top: 20px;
+                    background-color: azure;
+                    height: 27px;
+                    width: 80px;
+                    margin-left: 0px;
+                }
+
+                    .head .header-btn button a {
+                        text-decoration: none;
+                        font-size: 1.25em;
+                        font-weight: 500;
+                    }
+
+            .head :hover {
+                background-color: darksalmon;
+            }
+
+        .body .body-logo-img {
+            display: flex;
+            margin-left: 400px;
+        }
+
+            .body .body-logo-img img {
+                width: 90px;
+                height: 70px;
+                align-items: center;
+                overflow: hidden;
+                background-color: cornsilk;
+            }
+
+            .body .body-logo-img img {
+                font-size: small;
+                text-align: center;
+                color: #fff;
+                width: 100px;
+            }
+
+        #card {
+            width: 960px;
+            background-color: black;
+            border-top: 1px solid black;
+            margin-top: 10px;
+            stroke-width: inherit;
+        }
+
+        #item {
+            width: 225px;
+            height: 320px;
+            background-color: aqua;
+            text-align: center;
+            margin-top: 10px;
+            border: 2px solid black;
+            float: left;
+            margin: 5px;
+        }
+
+        #card #item h4 {
+            text-decoration: auto;
+            text-align: left;
+            margin-left: 5px;
+            margin-bottom: 5px;
+        }
+
+        #card #item h6 {
+            text-decoration: auto;
+            text-align: left;
+            margin-left: 5px;
+            margin-top: 5px;
+        }
+
+        .input-logoname {
+            text-align: center;
+            height: 100px;
+            margin-top: 0px;
+            font-size: 30px;
+            font-family: AdorshoLipi;
+        }
+
+            .input-logoname h1 {
+                margin-top: 5px;
+                margin-bottom: 200px;
+            }
+
+        /*input body form*/
+
+        .body .input-body-form {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            background-color: black;
+            font: wihte;
+        }
+
+            .body .input-body-form ul li {
+                float: left;
+                padding-right: 100px;
+                list-style: none;
+                align-content: center;
+                align-items: center;
+                height: 25px;
+                font-family: white;
+                width: 50px;
+                text-decoration-color: white;
+                margin: 5px;
+                background-color: aqua;
+            }
+
+                .body .input-body-form ul li a {
+                    text-decoration: none;
+                    color: black;
+                    width: 20px;
+                    font-size: 1.25em;
+                }
+
+                .body .input-body-form ul li :hover {
+                    background-color: darkslateblue;
+                }
+
+        .search {
+            width: 100%;
+            height: 40px;
+            margin-top: 0px;
+            margin-bottom: 55px;
+            margin-left: 250px;
+        }
+
+            .search input {
+                width: 520px;
+                height: 30px;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+
+            .search button {
+                width: 55px;
+                height: 35.5px;
+                font-weight: 700;
+                border: 2px;
+            }
+
+
+                .search button:hover {
+                    background-color: lawngreen;
+                    color: darkgreen;
+                    border: 2px solid lawngreen;
+                }
+
+        .footer-section {
+            width: 100%;
+            background-color: black;
+            color: white;
+            overflow: hidden;
+            /*text-align: left;*/
+            border: 5px solid red;
+        }
+
+        .footer-main {
+            display: flex;
+        }
+
+        .footerleft {
+            float: left;
+            left: 0;
+            width: 30%;
+        }
+
+        .footercenter {
+          
+            text-align: center;
+            width: 40%;
+        }
+
+        .footerright {
+            float: right;
+            right: 0;
+            width: 30%;
+            
+        }
+    </style>
+    <script src="Scripts/jquery.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="left"></div>
+        <div class="container">
+            <div class="head">
+                <div class="header-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+
+
+
+                    </ul>
+                </div>
+
+                <div class="header-btn">
+                    <button><a href="#">Cart: </a></button>
+                </div>
+
+            </div>
+            <div class="body">
+                <div class="body-logo-img">
+                    <img src="logo/foodology.png" />
+
+                </div>
+
+                <div class="input-logoname"><h1><a>FOODOLOGY</a></h1></div>
+
+                <div class="search">
+                    <p><h1>Category</h1></p>
+                    <input type="text" name="search" value="search" />
+                    <button type="button" value="search">search</button>
+                </div>
+
+                <div class="input-body-form">
+                    <ul>
+                        <li><a href="#">Drinks</a></li>
+
+
+
+                    </ul>
+
+                </div>
+                <div id="productsitem">
+
+                </div>
+
+                <div id="card">
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom, </h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+                    </div>
+                    <div id="item">
+                        <img src="images/burger/cheesburger.jpg" alt="" style="width:150px;height:150px;margin-top:5px" />
+                        <h4>Food1</h4>
+                        <h6>onion masroom</h6>
+                        <h4>Price 300Tk</h4>
+                        <button type="button">Add to cart</button>
+
+                    </div>
+                </div>
+            </div>
+            <footer class="footer-section">
+
+                <div class="footer-main">
+                    <div class="footerleft">
+                        <p><h3>Head Offrce:</h3></p>
+                        <address>231/2 North Ebrahimpur Dhaka 1216</address>
+                        <p>Hot Line: +8801748772199</p>
+                        <p>www.foodology.com</p>
+
+                    </div>
+                    <div class="footercenter">
+
+                        <p><h3>Customer Service</h3></p>
+                        <p> Contact Us</p>
+                        <p>Site Map</p>
+                        <p>Webmail</p>
+
+                    </div>
+                    <div class="footerright">
+
+                        <p><h3> Information</h3></p>
+                        <p>Terms & Conditions</p>
+                        <p>Product Information</p>
+                        <p>Inaccuracy Disclaimer</p>
+                        <p>Legal Information</p>
+                        <p>Correspondence and Communications</p>
+
+                    </div>
+                </div>
+                <p style="text-align:center">&copy; FOODOLOGY - 2022</p>
+
+            </footer>
+        </div>
+        <div class="right"></div>
+    </div>
+    <script type="text/javascript">
+        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+        window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+        window.IDBCursor = window.IDBCursor || window.webkitIDBCursor;
+        window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+
+        var db;
+        var currentEdit = null;
+
+        $(document).ready(function () {
+            var openReq = indexedDB.open("PetDB", 1);
+            openReq.onupgradeneeded = function (e) {
+                db = e.target.result;
+
+                var store = db.createObjectStore("petTbl", { keyPath: "id", autoIncrement: true });
+                console.log(store);
+            }
+
+            openReq.onsuccess = function (e) {
+                db = e.target.result;
+                console.log(db);
+                readAll();
+            }
+        });
+
+
+
+
+        function readAll() {
+
+            var tx = db.transaction(["petTbl"], "readonly");
+            var req = tx.objectStore("petTbl").openCursor();
+            req.onsuccess = function (e) {
+                var cursor = e.target.result;
+                if (!cursor) return;
+                $("#productsitem").append(
+
+                    `<div id="item">
+                            
+                            <img src="image/${cursor.value.Path}" width:"150"; height:"150"/>
+                            <h4>${cursor.value.Name}</h4>
+                            <p>${cursor.value.Descrip}tk</p>
+                             <p>Price:${cursor.value.Price}tk</p>
+                            <button type="button">Add to cart</button>
+                        </div>`
+                )
+                cursor.continue();
+            }
+            req.onerror = function (err) {
+                console.log(err);
+            }
+        }
+
+    </script>
+</body>
+</html>
